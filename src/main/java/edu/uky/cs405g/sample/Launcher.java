@@ -27,6 +27,11 @@ public class Launcher {
         String DBhost = "[your hostname here]";
         String DBname = "[your database name here]";
 
+        DBuser = "demo";
+        DBpassword = "class-demo";
+        DBhost = "vcbumg2.netlab.uky.edu";
+        DBname = "classproject";
+
         System.out.println("Starting Database...");
         dbEngine = new DBEngine(DBhost, DBname, DBuser, DBpassword);
 
@@ -54,7 +59,7 @@ public class Launcher {
                 .packages("edu.uky.cs405g.sample.httpcontrollers");
 
         System.out.println("Starting Web Server...");
-        URI BASE_URI = UriBuilder.fromUri("http://0.0.0.0/").port(9998).build();
+        URI BASE_URI = UriBuilder.fromUri("http://0.0.0.0/").port(9990).build();
         HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
 
         try {

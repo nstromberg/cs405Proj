@@ -9,10 +9,9 @@
     <version>1.0-SNAPSHOT</version>
 
 
-
     <properties>
-        <jarName>registration-server</jarName>
-        <mainClass>edu.uky.cs405g.Launcher</mainClass>
+        <jarName>sample</jarName>
+        <mainClass>edu.uky.cs405g.sample.Launcher</mainClass>
         <jersey.version>2.22.2</jersey.version>
 
         <jdk>1.8</jdk>

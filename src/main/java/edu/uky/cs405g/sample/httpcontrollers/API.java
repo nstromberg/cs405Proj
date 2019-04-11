@@ -24,12 +24,43 @@ public class API {
         }.getType();
         gson = new Gson();
     }
+
+
+    //curl http://localhost:9998/api/check
+    //{"status_code":1}
+    @GET
+    @Path("/status")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response healthcheck() {
+
+        String responseString = "{\"status_code\":0}";
+        try {
+
+            //Here is where you would put your system test, but this is not required.
+            //We just want to make sure your API is up and active/
+            //status_code = 0 , API is offline
+            //status_code = 1 , API is online
+            responseString = "{\"status_code\":1}";
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+
     //curl http://localhost:9998/api/listlocations
     //{"779a038b-aacc-44ca-b8cc-99671475061f":"800 Rose St.","1e4494a9-5677-49e4-b59f-b77c7900c73f":"123 Campus Road"}
     @GET
     @Path("/listlocations")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listTeams(@HeaderParam("X-Auth-API-Key") String authKey) {
+    public Response listTeams() {
         String responseString = "{}";
         try {
             Map<String,String> teamMap = Launcher.dbEngine.getLocations();
@@ -53,7 +84,7 @@ public class API {
     @GET
     @Path("/getlocation/{address}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addTeam(@HeaderParam("X-Auth-API-Key") String authKey, @PathParam("address") String address) {
+    public Response addTeam(@PathParam("address") String address) {
         String responseString = "{}";
         try {
 
@@ -78,7 +109,7 @@ public class API {
     @GET
     @Path("/removelocation/{location_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteLocation(@HeaderParam("X-Auth-API-Key") String authKey, @PathParam("location_id") String locationId) {
+    public Response deleteLocation(@PathParam("location_id") String locationId) {
         String responseString = "{}";
         try {
 
