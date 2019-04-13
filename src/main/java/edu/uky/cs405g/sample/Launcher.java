@@ -72,7 +72,7 @@ public class Launcher {
         dbEngine.dropTable("location");
 
         //create users table
-        String createUsersTable = "create table location(lid varchar(50), address varchar(100) not null, primary key (lid))";
+        String createUsersTable = "create table location(lid varchar(100), address varchar(100) not null, primary key (lid))";
         dbEngine.executeUpdate(createUsersTable);
 
     }
