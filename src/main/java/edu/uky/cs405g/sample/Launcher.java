@@ -27,10 +27,6 @@ public class Launcher {
         String DBhost = "[your hostname here]";
         String DBname = "[your database name here]";
 
-        DBuser = "demo";
-        DBpassword = "class-demo";
-        DBhost = "vcbumg2.netlab.uky.edu";
-        DBname = "classproject";
 
         System.out.println("Starting Database...");
         dbEngine = new DBEngine(DBhost, DBname, DBuser, DBpassword);
