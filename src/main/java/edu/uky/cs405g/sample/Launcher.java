@@ -27,7 +27,7 @@ public class Launcher {
         String DBhost = "localhost";
         String DBname = "hie";
 
-        //This is a test comment!
+        //This is a test comment - Kyra
 
         System.out.println("Starting Database...");
         dbEngine = new DBEngine(DBhost, DBname, DBuser, DBpassword);
