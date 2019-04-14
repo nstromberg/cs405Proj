@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cs405Project" />
         <module name="sample" />
+        <module name="cs405Proj" />
         <module name="cs405ProjectSample" />
       </profile>
     </annotationProcessing>
