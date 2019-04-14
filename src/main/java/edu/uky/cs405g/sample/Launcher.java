@@ -25,7 +25,7 @@ public class Launcher {
         String DBpassword = "1845Shady$";
         //for your laptop DBhost = "localhost", for your VM instance DBhost = [your account].netlab.uky.edu
         String DBhost = "localhost";
-        String DBname = "classproject";
+        String DBname = "hie";
 
 
         System.out.println("Starting Database...");
