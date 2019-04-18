@@ -204,6 +204,40 @@ public class DBEngine {
         return providerMap;
     }
 
+    public Map<String,String> getProviderNPI(String npi) {
+        Map<String,String> providerMap = new HashMap<>();
+
+        Statement stmt = null;
+        try
+        {
+            Connection conn = ds.getConnection();
+            String queryString = null;
+
+            queryString = "SELECT * FROM provider WHERE npi ='" + npi + "'";
+
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(queryString);
+
+            while (rs.next()) {
+                String department_id = rs.getString("department_id");
+                providerMap.put("npi", npi);
+                providerMap.put("department_id", department_id);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return providerMap;
+    }
+
     public int executeUpdate(String stmtString) {
         int result = -1;
         try {

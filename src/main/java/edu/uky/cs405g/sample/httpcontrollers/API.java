@@ -249,4 +249,27 @@ public class API {
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    @GET
+    @Path("/getprovider/{npi}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProvider(@PathParam("npi") String npi) {
+        String responseString = "{}";
+        try {
+
+            Map<String,String> teamMap = Launcher.dbEngine.getProviderNPI(npi);
+
+            responseString = Launcher.gson.toJson(teamMap);
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
 }
