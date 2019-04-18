@@ -272,4 +272,37 @@ public class API {
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    //curl http://localhost:9998/api/removelocation/ff2f86ba-ea87-4f5d-8d39-4bdd20b7a532
+    //{"status":"1"}
+    @GET
+    @Path("/removeprovider/{npi}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteProvider(@PathParam("npi") String npi) {
+        String responseString = "{}";
+        try {
+
+
+            String queryString = "delete from provider WHERE npi='" + npi + "'";
+
+            System.out.println(queryString);
+
+            int status = Launcher.dbEngine.executeUpdate(queryString);
+
+            System.out.println("status: " + status);
+
+            responseString = "{\"status\":\"" + status +"\"}";
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
 }
