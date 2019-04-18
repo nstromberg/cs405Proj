@@ -196,4 +196,57 @@ public class API {
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    @POST
+    @Path("/addprovider")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addProvider(InputStream incomingData) {
+
+        StringBuilder addProvider = new StringBuilder();
+        String returnString = null;
+        try {
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                addProvider.append(line);
+            }
+
+            String jsonString = addProvider.toString();
+            Map<String, String> myMap = gson.fromJson(jsonString, mapType);
+            String department_id = myMap.get("department_id");
+            String npi = myMap.get("npi");
+
+            Map<String,String> departmentMap = Launcher.dbEngine.getProvider(department_id);
+
+            if(departmentMap.size() == 0) {
+
+                String createUsersTable = "insert into provider values ('" + npi + "','" + department_id  + "')";
+
+                System.out.println(createUsersTable);
+
+                int status = Launcher.dbEngine.executeUpdate(createUsersTable);
+
+                returnString = "{\"status\":\"" + status +"\"}\n";
+
+
+            } else {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Can't insert duplicate provider department!")
+                        .header("Access-Control-Allow-Origin", "*").build();
+            }
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal Server Error")
+                    .header("Access-Control-Allow-Origin", "*").build();
+        }
+
+        return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
 }

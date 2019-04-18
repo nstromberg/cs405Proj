@@ -170,6 +170,40 @@ public class DBEngine {
         return locationMap;
     }
 
+    public Map<String,String> getProvider(String department_id) {
+        Map<String,String> providerMap = new HashMap<>();
+
+        Statement stmt = null;
+        try
+        {
+            Connection conn = ds.getConnection();
+            String queryString = null;
+
+            queryString = "SELECT * FROM provider WHERE department_id ='" + department_id + "'";
+
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(queryString);
+
+            while (rs.next()) {
+                String npi = rs.getString("npi");
+                providerMap.put("npi", npi);
+                providerMap.put("department_id", department_id);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return providerMap;
+    }
+
     public int executeUpdate(String stmtString) {
         int result = -1;
         try {
