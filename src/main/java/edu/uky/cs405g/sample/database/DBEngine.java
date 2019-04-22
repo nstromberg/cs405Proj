@@ -100,6 +100,42 @@ public class DBEngine {
     }
 
 
+    public Map<String,String> getLocations() {
+        Map<String,String> teamIdMap = new HashMap<>();
+
+        Statement stmt = null;
+        try
+        {
+            Connection conn = ds.getConnection();
+            String queryString = null;
+
+            queryString = "create database hie;"+
+                            "use hie;" +
+                            "create table location();";
+
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(queryString);
+
+            while (rs.next()) {
+                String teamId = rs.getString("lid");
+                String teamName = rs.getString("address");
+
+                teamIdMap.put(teamId, teamName);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return teamIdMap;
+    }
 
     public Map<String,String> getLocations() {
         Map<String,String> teamIdMap = new HashMap<>();

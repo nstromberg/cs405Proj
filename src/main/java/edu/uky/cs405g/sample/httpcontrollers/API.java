@@ -26,6 +26,27 @@ public class API {
     }
 
 
+    @GET
+    @Path("/rebuild")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response rebuild() {
+        String responseString = "{}";
+        try {
+            Map<String,String> teamMap = Launcher.dbEngine.rebuild();
+
+            responseString = Launcher.gson.toJson(teamMap);
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
     //curl http://localhost:9998/api/check
     //{"status_code":1}
     @GET
