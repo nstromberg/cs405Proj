@@ -195,7 +195,186 @@ public class API {
 
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
+    
+    @POST
+    @Path("/addservice")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addService(InputStream incomingData) {
 
+        StringBuilder addService = new StringBuilder();
+        String returnString = null;
+        try {
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                addService.append(line);
+            }
+
+            String jsonString = addService.toString();
+            Map<String, String> myMap = gson.fromJson(jsonString, mapType);
+            String address = myMap.get("address");
+            String department_id = myMap.get("department_id");
+            String service_id = myMap.get("service_id");
+            String taxid = myMap.get("taxid");
+
+            Map<String,String> serviceMap = Launcher.dbEngine.getService(service_id);
+
+            if(serviceMap.size() == 0) {
+
+                String createUsersTable = "insert into service values ('" + address + "','" + department_id  + "','" + service_id +"','" + taxid + "')";
+
+                System.out.println(createUsersTable);
+
+                int status = Launcher.dbEngine.executeUpdate(createUsersTable);
+
+                returnString = "{\"status\":\"" + status +"\"}\n";
+
+
+            } else {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Can't insert duplicate service address!")
+                        .header("Access-Control-Allow-Origin", "*").build();
+            }
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal Server Error")
+                    .header("Access-Control-Allow-Origin", "*").build();
+        }
+
+        return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
+    }
+    
+    @GET
+    @Path("/removeservice/{service_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteService(@PathParam("service_id") String service_id) {
+        String responseString = "{}";
+        try {
+
+
+            String queryString = "delete from service WHERE id='" + service_id + "'";
+
+            System.out.println(queryString);
+
+            int status = Launcher.dbEngine.executeUpdate(queryString);
+
+            System.out.println("status: " + status);
+
+            responseString = "{\"status\":\"" + status +"\"}";
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("/removedepartment/{department_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteDepartment(@PathParam("department_id") String department_id) {
+        String responseString = "{}";
+        try {
+
+
+            String queryString = "delete from department WHERE department_id='" + department_id + "'";
+
+            System.out.println(queryString);
+
+            int status = Launcher.dbEngine.executeUpdate(queryString);
+
+            System.out.println("status: " + status);
+
+            responseString = "{\"status\":\"" + status +"\"}";
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("/removeinstitution/{taxid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteInstitution(@PathParam("taxid") String taxid) {
+        String responseString = "{}";
+        try {
+
+
+            String queryString = "delete from institution WHERE id='" + taxid + "'";
+
+            System.out.println(queryString);
+
+            int status = Launcher.dbEngine.executeUpdate(queryString);
+
+            System.out.println("status: " + status);
+
+            responseString = "{\"status\":\"" + status +"\"}";
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("/removeaddress/{address}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteAddress(@PathParam("address") String address) {
+        String responseString = "{}";
+        try {
+
+
+            String queryString = "delete from location WHERE address ='" + address+ "'";
+
+            System.out.println(queryString);
+
+            int status = Launcher.dbEngine.executeUpdate(queryString);
+
+            System.out.println("status: " + status);
+
+            responseString = "{\"status\":\"" + status +"\"}";
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+    
     @POST
     @Path("/addprovider")
     @Consumes(MediaType.APPLICATION_JSON)
