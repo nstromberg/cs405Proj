@@ -169,7 +169,45 @@ public class DBEngine {
 
         return locationMap;
     }
+    public Map<String, String> getService(String service_id){
+        Map<String,String> serviceMap = new HashMap<>();
+        Statement stmt = null;
+        try
+        {
+            Connection conn = ds.getConnection();
+            String queryString = null;
 
+            queryString = "SELECT * FROM service WHERE id='" + service_id + "'";
+            //to test if it's working or not
+            System.out.println("Query: [" + queryString + "]");
+
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(queryString);
+
+            while (rs.next()) {
+                String taxid= rs.getString("taxid");
+                String address = rs.getString("address");
+                String department_id = rs.getString("department_id");
+                serviceMap.put("taxid", taxid);
+                serviceMap.put("address", address);
+                serviceMap.put("department_id", department_id);
+                serviceMap.put("service_id", service_id);
+
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return serviceMap;
+    }
     public Map<String,String> getProvider(String department_id) {
         Map<String,String> providerMap = new HashMap<>();
 
