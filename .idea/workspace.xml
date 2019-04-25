@@ -26,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+            <state>
+              <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -35,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/database/DBEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="327" column="22" selection-start-line="327" selection-start-column="22" selection-end-line="327" selection-end-column="22" />
+            <state relative-caret-position="717">
+              <caret line="276" column="27" lean-forward="true" selection-start-line="276" selection-start-column="27" selection-end-line="276" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -44,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/httpcontrollers/API.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="329" column="74" selection-start-line="329" selection-start-column="74" selection-end-line="329" selection-end-column="74" />
+            <state relative-caret-position="170">
+              <caret line="330" selection-start-line="330" selection-end-line="330" />
             </state>
           </provider>
         </entry>
@@ -77,9 +77,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="1490" />
+    <option name="width" value="1522" />
+    <option name="height" value="1932" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -119,6 +119,24 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs405Proj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs405Proj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs405Proj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs405Proj" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sample" type="462c0819:PsiDirectoryNode" />
+              <item name="httpcontrollers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -169,7 +187,7 @@
       <workItem from="1555260707558" duration="85000" />
       <workItem from="1555260821296" duration="1644000" />
       <workItem from="1556205189241" duration="2272000" />
-      <workItem from="1556209425033" duration="1774000" />
+      <workItem from="1556209425033" duration="4459000" />
     </task>
     <task id="LOCAL-00001" summary="Added code for get/add service using joins and &quot;if not exist&quot; clauses">
       <created>1556206859206</created>
@@ -178,11 +196,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556206859206</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added patient interfaces">
+      <created>1556211530644</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1556211530645</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixed service interfaces sql errors">
+      <created>1556212844670</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1556212844670</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5775000" />
+    <option name="totallyTimeSpent" value="8460000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -197,7 +229,7 @@
     <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49793103" visible="true" weight="0.22757111" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49793103" visible="true" weight="0.22757111" />
       <window_info id="Structure" order="1" sideWeight="0.5024233" side_tool="true" weight="0.21748401" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -206,13 +238,13 @@
       <window_info id="Favorites" order="6" sideWeight="0.50206894" side_tool="true" weight="0.22319475" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32932165" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.20678337" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32932165" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -275,7 +307,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added code for get/add service using joins and &quot;if not exist&quot; clauses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added code for get/add service using joins and &quot;if not exist&quot; clauses" />
+    <MESSAGE value="Added patient interfaces" />
+    <MESSAGE value="Fixed service interfaces sql errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed service interfaces sql errors" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/target/classes/edu/uky/cs405g/sample/Launcher.class">
@@ -283,22 +317,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+        <state>
+          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/database/DBEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="327" column="22" selection-start-line="327" selection-start-column="22" selection-end-line="327" selection-end-column="22" />
+        <state relative-caret-position="717">
+          <caret line="276" column="27" lean-forward="true" selection-start-line="276" selection-start-column="27" selection-end-line="276" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uky/cs405g/sample/httpcontrollers/API.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="329" column="74" selection-start-line="329" selection-start-column="74" selection-end-line="329" selection-end-column="74" />
+        <state relative-caret-position="170">
+          <caret line="330" selection-start-line="330" selection-end-line="330" />
         </state>
       </provider>
     </entry>
