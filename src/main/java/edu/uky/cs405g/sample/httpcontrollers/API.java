@@ -282,28 +282,6 @@ public class API {
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
-//    @GET
-//    @Path("/getpatient/{pid}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getPatient(@PathParam("pid") String pid) {
-//        String responseString = "{}";
-//        try {
-//
-//            Map<String,String> patientMap = Launcher.dbEngine.getPatient(pid);
-//
-//            responseString = Launcher.gson.toJson(patientMap);
-//
-//        } catch (Exception ex) {
-//
-//            StringWriter sw = new StringWriter();
-//            ex.printStackTrace(new PrintWriter(sw));
-//            String exceptionAsString = sw.toString();
-//            ex.printStackTrace();
-//
-//            return Response.status(500).entity(exceptionAsString).build();
-//        }
-//        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
-//    }
 
     @POST
     @Path("/adddata")
@@ -354,84 +332,6 @@ public class API {
 
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
-
-    @GET
-    @Path("/getdata/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getData(@PathParam("id") String id) {
-        String responseString = "{}";
-        try {
-
-            Map<String,String> teamMap = Launcher.dbEngine.getData(id);
-
-            responseString = Launcher.gson.toJson(teamMap);
-
-        } catch (Exception ex) {
-
-            StringWriter sw = new StringWriter();
-            ex.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
-            ex.printStackTrace();
-
-            return Response.status(500).entity(exceptionAsString).build();
-        }
-        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
-    }
-
-//    @POST
-//    @Path("/addpatient")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response addPatient(InputStream incomingData) {
-//
-//        StringBuilder addPatient = new StringBuilder();
-//        String returnString = null;
-//        try {
-//
-//            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-//            String line = null;
-//            while ((line = in.readLine()) != null) {
-//                addPatient.append(line);
-//            }
-//
-//            String jsonString = addPatient.toString();
-//            Map<String, String> myMap = gson.fromJson(jsonString, mapType);
-//            String pid = myMap.get("pid");
-//            String address = myMap.get("address");
-//            String ssn = myMap.get("ssn");
-//            String provider_id = myMap.get("provider_id");
-//
-//            Map<String,String> patientMap = Launcher.dbEngine.getPatient(pid);
-//
-//            if(patientMap.size() == 0) {
-//
-//                String createUsersTable = "insert into patient values ('" + pid + "','" + ssn + "','" + provider_id+ "','"+address + "')";
-//
-//                System.out.println(createUsersTable);
-//
-//                int status = Launcher.dbEngine.executeUpdate(createUsersTable);
-//
-//                returnString = "{\"status\":\"" + status +"\"}\n";
-//
-//
-//            } else {
-//                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Can't insert duplicate patient!")
-//                        .header("Access-Control-Allow-Origin", "*").build();
-//            }
-//
-//
-//        } catch (Exception ex) {
-//
-//            StringWriter sw = new StringWriter();
-//            ex.printStackTrace(new PrintWriter(sw));
-//            String exceptionAsString = sw.toString();
-//            ex.printStackTrace();
-//
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal Server Error")
-//                    .header("Access-Control-Allow-Origin", "*").build();
-//        }
-//
-//        return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
-//    }
 
     @GET
     @Path("/removeservice/{service_id}")
@@ -688,12 +588,12 @@ public class API {
             String address = myMap.get("address");
             String provider_id = myMap.get("provider_id");
 
-            Map<String,String> departmentMap = Launcher.dbEngine.getPatient(provider_id);
+            Map<String,String> patientMapPID = Launcher.dbEngine.getPatientPID(pid);
+            Map<String,String> patientMapSSN = Launcher.dbEngine.getPatientSSN(ssn);
 
-            if(departmentMap.size() == 0) {
+
+            if(patientMapPID.size() == 0 && patientMapSSN.size() == 0) {
                 String createUsersTable = "insert into patient values ('" + pid + "','" + ssn  + "','" + address  + "','" + provider_id  + "')";
-
-                System.out.println(createUsersTable);
 
                 int status = Launcher.dbEngine.executeUpdate(createUsersTable);
 
@@ -701,7 +601,7 @@ public class API {
 
 
             } else {
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Can't insert duplicate patient provider!")
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Can't insert duplicate patient pid or ssn!")
                         .header("Access-Control-Allow-Origin", "*").build();
             }
 
@@ -743,7 +643,7 @@ public class API {
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
-    //curl http://localhost:9998/api/removelocation/ff2f86ba-ea87-4f5d-8d39-4bdd20b7a532
+    //curl http://localhost:9998/api/removepatient/p-0-0-0
     //{"status":"1"}
     @GET
     @Path("/removepatient/{pid}")
