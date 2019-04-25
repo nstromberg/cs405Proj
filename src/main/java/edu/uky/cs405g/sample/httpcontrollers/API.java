@@ -330,7 +330,7 @@ public class API {
 
 
 
-            String createUsersTable = "insert into data(id,pid,sid,somedata) values ('" + id + "','" + pid + "','" + service_id+  "','" +data+ "')";
+            String createUsersTable = "insert into data(id,pid,sid) values ('" + id + "','" + pid + "','" + service_id+ "')";
 
             System.out.println(createUsersTable);
 
