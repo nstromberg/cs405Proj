@@ -654,8 +654,6 @@ public class API {
 
             String queryString = "delete from patient WHERE pid='" + pid + "'";
 
-            System.out.println(queryString);
-
             int status = Launcher.dbEngine.executeUpdate(queryString);
 
             System.out.println("status: " + status);
