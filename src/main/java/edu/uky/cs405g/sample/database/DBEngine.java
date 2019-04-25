@@ -170,45 +170,7 @@ public class DBEngine {
         return locationMap;
     }
 
-//    public Map<String,String> getPatient(String patient_id) {
-//        Map<String,String> patientMap = new HashMap<>();
-//
-//        Statement stmt = null;
-//        try
-//        {
-//            Connection conn = ds.getConnection();
-//            String queryString = null;
-//
-//            queryString = "SELECT * FROM patient WHERE id='" + patient_id + "'";
-//
-//            stmt = conn.createStatement();
-//
-//            ResultSet rs = stmt.executeQuery(queryString);
-//
-//            while (rs.next()) {
-//                String pid = rs.getString("id");
-//                String address = rs.getString("address");
-//                String provider = rs.getString("provider");
-//                String ssn = rs.getString("ssn");
-//
-//                patientMap.put("address", address);
-//                patientMap.put("provider_id", provider);
-//                patientMap.put("pid", pid);
-//                patientMap.put("ssn", ssn);
-//            }
-//
-//            rs.close();
-//            stmt.close();
-//            conn.close();
-//
-//        }
-//        catch(Exception ex)
-//        {
-//            ex.printStackTrace();
-//        }
-//
-//        return patientMap;
-//    }
+
     public Map<String, String> getService(String service_id){
         Map<String,String> serviceMap = new HashMap<>();
         Statement stmt = null;
@@ -316,7 +278,7 @@ public class DBEngine {
         return providerMap;
     }
 
-    public Map<String,String> getPatient(String provider_id) {
+    public Map<String,String> getPatientSSN(String ssn) {
         Map<String,String> patientMap = new HashMap<>();
 
         Statement stmt = null;
@@ -325,7 +287,7 @@ public class DBEngine {
             Connection conn = ds.getConnection();
             String queryString = null;
 
-            queryString = "SELECT * FROM patient WHERE provider_id ='" + provider_id + "'";
+            queryString = "SELECT * FROM patient WHERE ssn ='" + ssn + "'";
 
             stmt = conn.createStatement();
 
@@ -334,10 +296,10 @@ public class DBEngine {
             while (rs.next()) {
                 String pid = rs.getString("pid");
                 patientMap.put("pid", pid);
-                String ssn = rs.getString("ssn");
                 patientMap.put("ssn", ssn);
                 String address = rs.getString("address");
                 patientMap.put("address", address);
+                String provider_id = rs.getString("provider_id");
                 patientMap.put("provider_id", provider_id);
             }
 
