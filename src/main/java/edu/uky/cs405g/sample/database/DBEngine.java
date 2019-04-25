@@ -169,6 +169,46 @@ public class DBEngine {
 
         return locationMap;
     }
+
+    public Map<String,String> getPatient(String patient_id) {
+        Map<String,String> patientMap = new HashMap<>();
+
+        Statement stmt = null;
+        try
+        {
+            Connection conn = ds.getConnection();
+            String queryString = null;
+
+            queryString = "SELECT * FROM patient WHERE id='" + patient_id + "'";
+
+            stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(queryString);
+
+            while (rs.next()) {
+                String pid = rs.getString("id");
+                String address = rs.getString("address");
+                String provider = rs.getString("provider");
+                String ssn = rs.getString("ssn");
+
+                patientMap.put("address", address);
+                patientMap.put("provider_id", provider);
+                patientMap.put("pid", pid);
+                patientMap.put("ssn", ssn);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return patientMap;
+    }
     public Map<String, String> getService(String service_id){
         Map<String,String> serviceMap = new HashMap<>();
         Statement stmt = null;
