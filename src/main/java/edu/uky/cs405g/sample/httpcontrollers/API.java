@@ -223,14 +223,14 @@ public class API {
             if(serviceMap.size() == 0) {
 
                 String locationId = UUID.randomUUID().toString();
-                String insertLocation = "if not exists(select * from location where address = '"+address+"') insert into location values('"+address+"','"+locationId+"');";
-                String insertInstitution = "if not exists(select * from institution where id='"+taxid+"') insert into institution values('"+taxid+"','"+locationId+"');";
-                String insertDepartment = "if not exists(select * from department where id = '"+department_id+"') insert into department values('"+department_id+"','"+taxid+"');";
+                String insertLocation = "insert ignore into location values('"+address+"','"+locationId+"');";
+                String insertInstitution = "insert ignore into institution values('"+taxid+"','"+locationId+"');";
+                String insertDepartment = "insert ignore into department values('"+department_id+"','"+taxid+"');";
                 Launcher.dbEngine.executeUpdate(insertLocation);
                 Launcher.dbEngine.executeUpdate(insertInstitution);
                 Launcher.dbEngine.executeUpdate(insertDepartment);
 
-                String createUsersTable = "insert into service values ('" + address + "','" + department_id  + "','" + service_id +"','" + taxid + "')";
+                String createUsersTable = "insert into service values ('" + service_id + "','" + locationId  + "','" + department_id +"','" + taxid + "')";
 
                 System.out.println(createUsersTable);
 
@@ -331,7 +331,7 @@ public class API {
 
             if(patientMap.size() == 0) {
 
-                String createUsersTable = "insert into provider values ('" + pid + "','" + ssn + "','" + provider_id+ "','"+address + "')";
+                String createUsersTable = "insert into patient values ('" + pid + "','" + ssn + "','" + provider_id+ "','"+address + "')";
 
                 System.out.println(createUsersTable);
 

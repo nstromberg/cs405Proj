@@ -24,7 +24,7 @@ public class Launcher {
         String DBuser = "nst232";
         String DBpassword = "1845Shady$";
         //for your laptop DBhost = "localhost", for your VM instance DBhost = [your account].netlab.uky.edu
-        String DBhost = "localhost";
+        String DBhost = "nst232.netlab.uky.edu";
         String DBname = "hie";
 
         //This is a test comment! - Kyra - master

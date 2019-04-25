@@ -217,7 +217,7 @@ public class DBEngine {
             Connection conn = ds.getConnection();
             String queryString = null;
 
-            queryString = "SELECT * FROM service JOIN location on location.id = service.lid  WHERE id='" + service_id + "'";
+            queryString = "SELECT * FROM service JOIN location on location.id = service.lid  WHERE service.id='" + service_id + "'";
             //to test if it's working or not
             System.out.println("Query: [" + queryString + "]");
 
