@@ -668,7 +668,7 @@ public class API {
             Map<String,String> departmentMap = Launcher.dbEngine.getPatient(provider_id);
 
             if(departmentMap.size() == 0) {
-                String createUsersTable = "insert into provider values ('" + pid + "','" + ssn  + "','" + address  + "','" + provider_id  + "')";
+                String createUsersTable = "insert into patient values ('" + pid + "','" + ssn  + "','" + address  + "','" + provider_id  + "')";
 
                 System.out.println(createUsersTable);
 
@@ -728,7 +728,6 @@ public class API {
     public Response removePatient(@PathParam("pid") String pid) {
         String responseString = "{}";
         try {
-
 
             String queryString = "delete from patient WHERE pid='" + pid + "'";
 
