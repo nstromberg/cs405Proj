@@ -330,7 +330,7 @@ public class API {
 
 
 
-            String createUsersTable = "insert into data(id,pid,sid) values ('" + id + "','" + pid + "','" + service_id+ "')";
+            String createUsersTable = "insert into data(id,pid,sid,somedata) values ('" + id + "','" + pid + "','" + service_id+  "','" +data+ "')";
 
             System.out.println(createUsersTable);
 
@@ -353,6 +353,29 @@ public class API {
         }
 
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("/getdata/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getData(@PathParam("id") String id) {
+        String responseString = "{}";
+        try {
+
+            Map<String,String> teamMap = Launcher.dbEngine.getData(id);
+
+            responseString = Launcher.gson.toJson(teamMap);
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
 //    @POST
