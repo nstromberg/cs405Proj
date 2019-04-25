@@ -177,7 +177,7 @@ public class DBEngine {
             Connection conn = ds.getConnection();
             String queryString = null;
 
-            queryString = "SELECT * FROM service WHERE id='" + service_id + "'";
+            queryString = "SELECT * FROM service JOIN location on location.id = service.lid  WHERE id='" + service_id + "'";
             //to test if it's working or not
             System.out.println("Query: [" + queryString + "]");
 
@@ -188,7 +188,7 @@ public class DBEngine {
             while (rs.next()) {
                 String taxid= rs.getString("taxid");
                 String address = rs.getString("address");
-                String department_id = rs.getString("department_id");
+                String department_id = rs.getString("did");
                 serviceMap.put("taxid", taxid);
                 serviceMap.put("address", address);
                 serviceMap.put("department_id", department_id);

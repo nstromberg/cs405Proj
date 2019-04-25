@@ -222,6 +222,14 @@ public class API {
 
             if(serviceMap.size() == 0) {
 
+                String locationId = UUID.randomUUID().toString();
+                String insertLocation = "if not exists(select * from location where address = '"+address+"') insert into location values('"+address+"','"+locationId+"');";
+                String insertInstitution = "if not exists(select * from institution where id='"+taxid+"') insert into institution values('"+taxid+"','"+locationId+"');";
+                String insertDepartment = "if not exists(select * from department where id = '"+department_id+"') insert into department values('"+department_id+"','"+taxid+"');";
+                Launcher.dbEngine.executeUpdate(insertLocation);
+                Launcher.dbEngine.executeUpdate(insertInstitution);
+                Launcher.dbEngine.executeUpdate(insertDepartment);
+
                 String createUsersTable = "insert into service values ('" + address + "','" + department_id  + "','" + service_id +"','" + taxid + "')";
 
                 System.out.println(createUsersTable);
@@ -250,7 +258,31 @@ public class API {
 
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
-    
+
+    @GET
+    @Path("/getservice/{sid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getService(@PathParam("sid") String sid) {
+        String responseString = "{}";
+        try {
+
+            Map<String,String> serviceMap = Launcher.dbEngine.getService(sid);
+
+            responseString = Launcher.gson.toJson(serviceMap);
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(500).entity(exceptionAsString).build();
+        }
+        return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+
     @GET
     @Path("/removeservice/{service_id}")
     @Produces(MediaType.APPLICATION_JSON)
