@@ -257,7 +257,7 @@ public class DBEngine {
             Connection conn = ds.getConnection();
             String queryString = null;
 
-            queryString = "SELECT * FROM provider WHERE department_id ='" + department_id + "'";
+            queryString = "SELECT * FROM provider WHERE did ='" + department_id + "'";
 
             stmt = conn.createStatement();
 

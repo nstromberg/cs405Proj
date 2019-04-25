@@ -306,6 +306,56 @@ public class API {
     }
 
     @POST
+    @Path("/adddata")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addData(InputStream incomingData) {
+
+        StringBuilder addData = new StringBuilder();
+        String returnString = null;
+        try {
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                addData.append(line);
+            }
+
+            String jsonString = addData.toString();
+            Map<String, String> myMap = gson.fromJson(jsonString, mapType);
+            String data = myMap.get("data");
+            String pid = myMap.get("patient_id");
+            String service_id = myMap.get("service_id");
+            String provider_id = myMap.get("provider_id");
+            String id = myMap.get("id");
+
+
+
+            String createUsersTable = "insert into data(id,pid,sid) values ('" + id + "','" + pid + "','" + service_id+ "')";
+
+            System.out.println(createUsersTable);
+
+            int status = Launcher.dbEngine.executeUpdate(createUsersTable);
+
+            returnString = "{\"status\":\"" + status +"\"}\n";
+
+
+
+
+        } catch (Exception ex) {
+
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            ex.printStackTrace();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal Server Error")
+                    .header("Access-Control-Allow-Origin", "*").build();
+        }
+
+        return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @POST
     @Path("/addpatient")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addPatient(InputStream incomingData) {
