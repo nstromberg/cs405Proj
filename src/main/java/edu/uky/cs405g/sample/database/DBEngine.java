@@ -260,7 +260,7 @@ public class DBEngine {
             ResultSet rs = stmt.executeQuery(queryString);
 
             while (rs.next()) {
-                String department_id = rs.getString("department_id");
+                String department_id = rs.getString("did");
                 providerMap.put("npi", npi);
                 providerMap.put("department_id", department_id);
             }
@@ -334,12 +334,12 @@ public class DBEngine {
             ResultSet rs = stmt.executeQuery(queryString);
 
             while (rs.next()) {
-                String pid = rs.getString("pid");
+                String pid = rs.getString("id");
                 patientMap.put("pid", pid);
                 patientMap.put("ssn", ssn);
                 String address = rs.getString("address");
                 patientMap.put("address", address);
-                String provider_id = rs.getString("provider_id");
+                String provider_id = rs.getString("provider");
                 patientMap.put("provider_id", provider_id);
             }
 
@@ -365,14 +365,14 @@ public class DBEngine {
             Connection conn = ds.getConnection();
             String queryString = null;
 
-            queryString = "SELECT * FROM patient WHERE pid ='" + pid + "'";
+            queryString = "SELECT * FROM patient WHERE id ='" + pid + "'";
 
             stmt = conn.createStatement();
 
             ResultSet rs = stmt.executeQuery(queryString);
 
             while (rs.next()) {
-                String provider_id = rs.getString("provider_id");
+                String provider_id = rs.getString("provider");
                 String address = rs.getString("address");
                 String ssn = rs.getString("ssn");
                 patientMap.put("pid", pid);

@@ -593,7 +593,7 @@ public class API {
 
 
             if(patientMapPID.size() == 0 && patientMapSSN.size() == 0) {
-                String createUsersTable = "insert into patient values ('" + pid + "','" + ssn  + "','" + address  + "','" + provider_id  + "')";
+                String createUsersTable = "insert into patient values ('" + pid + "','" + ssn  + "','" + provider_id  + "','" + address  + "')";
 
                 int status = Launcher.dbEngine.executeUpdate(createUsersTable);
 

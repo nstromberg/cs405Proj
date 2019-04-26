@@ -21,11 +21,11 @@ public class Launcher {
         gson = new Gson();
 
         //Database Client initialization
-        String DBuser = "smsb222";
-        String DBpassword = "9MyPassword01";
+        String DBuser = "nst232";
+        String DBpassword = "1845Shady$";
         //for your laptop DBhost = "localhost", for your VM instance DBhost = [your account].netlab.uky.edu
-        String DBhost = "localhost";
-        String DBname = "proj";
+        String DBhost = "nst232.netlab.uky.edu";
+        String DBname = "hie";
 
         //This is a test comment! - Kyra - master
 
@@ -56,7 +56,7 @@ public class Launcher {
                 .packages("edu.uky.cs405g.sample.httpcontrollers");
 
         System.out.println("Starting Web Server...");
-        URI BASE_URI = UriBuilder.fromUri("http://0.0.0.0/").port(9990).build();
+        URI BASE_URI = UriBuilder.fromUri("http://0.0.0.0/").port(9998).build();
         HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
 
         try {
