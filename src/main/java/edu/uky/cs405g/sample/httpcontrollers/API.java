@@ -456,7 +456,9 @@ public class API {
         }
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
-    
+
+    //curl -d '{"department_id":"d-0","npi":"n-000-000"}' -H "Content-Type: application/json" -X
+    // POST http://localhost:9990/api/addprovider
     @POST
     @Path("/addprovider")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -510,6 +512,7 @@ public class API {
         return Response.ok(returnString).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    //curl http://localhost:9990/api/getprovider/n-000-000
     @GET
     @Path("/getprovider/{npi}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -533,8 +536,7 @@ public class API {
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
-    //curl http://localhost:9998/api/removelocation/ff2f86ba-ea87-4f5d-8d39-4bdd20b7a532
-    //{"status":"1"}
+    //curl http://localhost:9990/api/removeprovider/n-000-000
     @GET
     @Path("/removeprovider/{npi}")
     @Produces(MediaType.APPLICATION_JSON)
